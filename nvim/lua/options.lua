@@ -131,7 +131,6 @@ vim.opt.confirm = false
 vim.o.termguicolors = true
 
 vim.o.lazyredraw = false
-vim.cmd 'colorscheme desert'
 
 -- Configure shada to remember cursor positions
 vim.o.shada = "'100,<50,s10,h"
