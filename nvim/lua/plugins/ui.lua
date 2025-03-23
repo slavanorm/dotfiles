@@ -51,7 +51,7 @@ return {
           { section = 'keys', padding = 1 },
           --{ title = 'Bookmarks', padding = 1 },
           { section = 'terminal', cmd = 'date +"%H:%M %d.%M %V/51"', padding = 1 },
-          { section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.5 -L 100' },
+          { section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.1 -l -M 10 -b 2' },
           --{ title = 'Recent global', padding = 1 },
           --{ section = 'recent_files', limit = 4, padding = 1 },
         },
