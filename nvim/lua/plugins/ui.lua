@@ -3,8 +3,8 @@ return {
     'folke/zen-mode.nvim',
     opts = {
       window = {
-        width = 0.62,
-        backdrop = 0.5,
+        width = 0.6,
+        backdrop = 0,
         options = {
           signcolumn = 'no',
           number = false,
@@ -14,7 +14,7 @@ return {
         },
       },
       plugins = {
-        gitsigns = { enabled = false },
+        gitsigns = { enabled = true },
         twilight = { enabled = false },
         options = {
           ruler = false,
@@ -31,10 +31,33 @@ return {
   },
   {
     'folke/snacks.nvim',
-    ---@type snacks.Config
     opts = {
+      dashboard = {
+        preset = {
+          keys = {
+            { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+          },
+          --header = [[123],[456]],
+        },
+        width = 40,
+        formats = {
+          key = function(item)
+            return { { '[', hl = 'special' }, { item.key, hl = 'key' }, { ']', hl = 'special' } }
+          end,
+        },
+        sections = {
+          { section = 'recent_files', cwd = true, limit = 4, padding = 1 },
+          { section = 'projects' },
+          { section = 'keys', padding = 1 },
+          --{ title = 'Bookmarks', padding = 1 },
+          { section = 'terminal', cmd = 'date +"%H:%M %d.%M %V/51"', padding = 1 },
+          { section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.5 -L 100' },
+          --{ title = 'Recent global', padding = 1 },
+          --{ section = 'recent_files', limit = 4, padding = 1 },
+        },
+      },
+
       indent = { enabled = false },
-      spell = { enabled = false },
       image = {
         enabled = true,
         max_width = 16,
@@ -80,22 +103,22 @@ return {
     end,
     overrides = function(colors)
       require 'telescope'
-  local makeDiagnosticColor = function(color)
-    local c = require("kanagawa.lib.color")
-    return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
-  end
+      local makeDiagnosticColor = function(color)
+        local c = require 'kanagawa.lib.color'
+        return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
+      end
       local theme = colors.theme
       return {
         NormalFloat = { bg = 'none' },
         FloatBorder = { bg = 'none' },
         FloatTitle = { bg = 'none' },
-        Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },  -- add `blend = vim.o.pumblend` to enable transparency
-        PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+        Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+        PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
         PmenuSbar = { bg = theme.ui.bg_m1 },
-    DiagnosticVirtualTextHint  = makeDiagnosticColor(theme.diag.hint),
-    DiagnosticVirtualTextInfo  = makeDiagnosticColor(theme.diag.info),
-    DiagnosticVirtualTextWarn  = makeDiagnosticColor(theme.diag.warning),
-    DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
+        DiagnosticVirtualTextHint = makeDiagnosticColor(theme.diag.hint),
+        DiagnosticVirtualTextInfo = makeDiagnosticColor(theme.diag.info),
+        DiagnosticVirtualTextWarn = makeDiagnosticColor(theme.diag.warning),
+        DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
         PmenuThumb = { bg = theme.ui.bg_p2 },
         -- todo: this doesnt work
         TelescopeTitle = { fg = theme.ui.special },

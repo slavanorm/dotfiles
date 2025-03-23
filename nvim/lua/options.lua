@@ -3,10 +3,7 @@ Keymap_opts = {
   noremap = true,
 }
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.g.have_nerd_font = true
-
+vim.opt.spell = false
 -- Automatically save on buffer leave
 vim.api.nvim_create_autocmd('BufLeave', {
   callback = function()
@@ -146,14 +143,14 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 -- Global settings
-vim.opt.tabstop = 2 -- Display tabs as 2 spaces
-vim.opt.shiftwidth = 2 -- Use 2 spaces for indentation
-vim.opt.softtabstop = 2 -- Make <Tab> behave as 2 spaces
+vim.opt.tabstop = 3 -- Display tabs as 3 spaces
+vim.opt.shiftwidth = 3 -- Use 2 spaces for indentation
+vim.opt.softtabstop = 3 -- Make <Tab> behave as 2 spaces
 --vim.o.textwidth = 80
 vim.o.formatoptions = vim.o.formatoptions .. 't'
---vim.o.expandtab = true
+vim.o.expandtab = true
 
--- show 4 spaces as 2
+-- show 3 spaces as 2
 vim.opt.conceallevel = 2
 
 -- Define a custom highlight group for concealed spaces
@@ -173,3 +170,22 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.opt.breakat = '.,?:; '
 vim.opt.linebreak = true
 vim.opt.wrap = true
+
+-- Disable borders for all floating windows
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = 'none',
+})
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = 'none',
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    package.loaded['keymaps'] = nil
+    require 'keymaps'
+    vim.opt.spell = false
+  end,
+})
+vim.opt.showtabline = 0

@@ -60,4 +60,6 @@ vim.keymap.set('n', '<leader>sN', function()
 end, { unpack(Keymap_opts), desc = '[S]earch [N]eovim files (grep)' })
 
 vim.keymap.set({ 'n', 'v', 'x' }, 'p', '<Plug>(YankyPutBefore)', { desc = 'always put before', unpack(Keymap_opts) })
+vim.keymap.set('n', 'qq', ':qa<CR>', { desc = 'exit on q spam', unpack(Keymap_opts) })
+vim.keymap.set('n', 'q', '<Nop>', { desc = 'disable macros rec', unpack(Keymap_opts) })
 --vim.keymap.set({ 'n','v', 'x' }, 'p', 'P', {desc='always put before'})

@@ -1,4 +1,6 @@
-require 'options'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.g.have_nerd_font = true
 
 -- lazy.nvim import (uncomment to download)
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -39,9 +41,9 @@ require('lazy').setup {
       -- disable some rtp plugins
       disabled_plugins = {
         'gzip',
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        'matchit',
+        'matchparen',
+        'netrwPlugin',
         'tarPlugin',
         'tohtml',
         'tutor',
@@ -50,6 +52,6 @@ require('lazy').setup {
     },
   },
 }
-
+require 'options'
 require 'keymaps'
 require 'macros'

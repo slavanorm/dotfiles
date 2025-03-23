@@ -37,4 +37,14 @@ return {
       lazy = false,
     },
   },
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        python = { 'ruff_fix', 'black', 'isort' },
+        go = { 'gofumpt', 'goimports', 'goimports-reviser', 'golines' },
+        sql = { 'sqlfmt' },
+      },
+    },
+  }
 }
