@@ -21,6 +21,31 @@ return {
       },
     },
     opts = {
+      defaults = {
+        border = false, -- Disable borders
+        layout_strategy = 'flex',
+        layout_config = {
+          flex = {
+            height = 0.90,
+            width = 0.90,
+            prompt_position = 'top',
+            horizontal = {
+              prompt_position = 'top',
+              height = 0.60,
+              width = 0.90,
+              preview_width = 0.65,
+              preview_cutoff = 100,
+            },
+            vertical = {
+              prompt_position = 'top',
+              height = 0.80,
+              width = 0.7,
+              preview_cutoff = 55,
+            },
+          },
+        },
+      },
+      initial_mode = 'normal',
       pickers = {
         colorscheme = {
           enable_preview = true,
@@ -62,6 +87,6 @@ return {
           prompt_title = 'Live Grep in Open Files',
         }
       end, { desc = '[S]earch [/] in Open Files' })
-   end,
+    end,
   },
 }

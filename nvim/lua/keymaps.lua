@@ -59,7 +59,12 @@ vim.keymap.set('n', '<leader>sN', function()
   }
 end, { unpack(Keymap_opts), desc = '[S]earch [N]eovim files (grep)' })
 
-vim.keymap.set({ 'n', 'v', 'x' }, 'p', '<Plug>(YankyPutBefore)', { desc = 'always put before', unpack(Keymap_opts) })
 vim.keymap.set('n', 'qq', ':qa<CR>', { desc = 'exit on q spam', unpack(Keymap_opts) })
 vim.keymap.set('n', 'q', '<Nop>', { desc = 'disable macros rec', unpack(Keymap_opts) })
---vim.keymap.set({ 'n','v', 'x' }, 'p', 'P', {desc='always put before'})
+vim.keymap.set({ 'n', 'v', 'x' }, 'a', 'A', { desc = 'always append', unpack(Keymap_opts) })
+vim.keymap.set({ 'n', 'v', 'x' }, 'i', 'a', { desc = 'always append', unpack(Keymap_opts) })
+vim.keymap.set('n', '<leader>fl', function()
+  require('telescope.builtin').live_grep {
+    search_dirs = { vim.fn.stdpath 'data' .. '/lazy' },
+  }
+end, { desc = '[S]Grep [L]azy.nvim plugin contents' })

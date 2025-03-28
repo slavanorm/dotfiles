@@ -1,3 +1,16 @@
+--[[
+-- Disable underlines for all highlight groups
+for _, group in ipairs(vim.fn.getcompletion('', 'highlight')) do
+  vim.api.nvim_set_hl(0, group, { underline = false })
+end
+--]]
+
+-- Disable underlines for LSP diagnostics
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false })
+
 return {
   {
     'folke/zen-mode.nvim',
@@ -48,11 +61,9 @@ return {
         sections = {
           { section = 'recent_files', cwd = true, limit = 4, padding = 1 },
           { section = 'projects' },
-          { section = 'keys', padding = 1 },
-          --{ title = 'Bookmarks', padding = 1 },
+          { section = 'keys' },
           { section = 'terminal', cmd = 'date +"%H:%M %d.%M %V/51"', padding = 1 },
           { section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.1 -l -M 10 -b 2' },
-          --{ title = 'Recent global', padding = 1 },
           --{ section = 'recent_files', limit = 4, padding = 1 },
         },
       },

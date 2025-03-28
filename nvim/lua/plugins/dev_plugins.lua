@@ -1,7 +1,24 @@
+local lc_dir = vim.fn.expand '~/Py/nvim/'
+
+local function dir_exists(path)
+  local f = io.open(path, 'r')
+  if f then
+    f:close()
+    return true
+  end
+  return false
+end
+
+if not dir_exists(lc_dir) then
+  return {}
+end
+
+vim.notify 'Loading local plugins'
+
 return {
   {
     'slavanorm/leetcode.nvim',
-    dir = '~/Py/nvim/leetcode.nvim/',
+    dir = lc_dir .. '/leetcode.nvim/',
     dev = true,
     build = ':TSUpdate html',
     dependencies = {

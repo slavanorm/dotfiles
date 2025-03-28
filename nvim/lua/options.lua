@@ -33,30 +33,6 @@ vim.api.nvim_create_autocmd('FocusLost', {
     end
   end,
 })
--- Disable hints and warnings globally (including signs and underlines)
-vim.diagnostic.config {
-  virtual_text = function(namespace, bufnr, diagnostics)
-    -- Filter out hints and warnings
-    local filtered = vim.tbl_filter(function(diagnostic)
-      return diagnostic.severity ~= vim.diagnostic.severity.HINT and diagnostic.severity ~= vim.diagnostic.severity.WARN
-    end, diagnostics)
-    return #filtered > 0 and filtered or nil
-  end,
-  signs = function(namespace, bufnr, diagnostics)
-    -- Filter out hints and warnings from signs
-    local filtered = vim.tbl_filter(function(diagnostic)
-      return diagnostic.severity ~= vim.diagnostic.severity.HINT and diagnostic.severity ~= vim.diagnostic.severity.WARN
-    end, diagnostics)
-    return #filtered > 0 and filtered or nil
-  end,
-  underline = function(namespace, bufnr, diagnostics)
-    -- Filter out hints and warnings from underlines
-    local filtered = vim.tbl_filter(function(diagnostic)
-      return diagnostic.severity ~= vim.diagnostic.severity.HINT and diagnostic.severity ~= vim.diagnostic.severity.WARN
-    end, diagnostics)
-    return #filtered > 0 and filtered or nil
-  end,
-}
 -- Disable confirmation prompts
 vim.opt.confirm = false
 
@@ -189,3 +165,5 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 vim.opt.showtabline = 0
+vim.opt.autoindent = true
+vim.opt.smartindent = true
