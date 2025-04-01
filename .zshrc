@@ -25,7 +25,7 @@ setopt HIST_NO_STORE
 setopt HIST_NO_FUNCTIONS
 export HISTTIMEFORMAT='%F -'
 export HISTCONTROL=ignoreboth:erasedups
-export HISTORY_IGNORE="(ls*|[bf]g|exit|pwd|clear|cat*|nvim*|history*|which*| * --help)"
+export HISTORY_IGNORE='(ls|[bf]g|exit|pwd|nvim|history|cd ..|which| * --help)'
 export HISTSIZE=99999
 export HISTFILESIZE=999999
 export SAVEHIST=$HISTSIZE
