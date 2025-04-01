@@ -1,0 +1,13 @@
+os:
+  editPreset: "nvim"
+gui:
+  nerdFontsVersion: "3"
+  skipNoStagedFilesWarning: false
+  sidePanelWidth: 0.4
+  expandFocusedSidePanel: false
+  showFileTree: false
+  showFileIcons: false
+  showCommandLog: false
+  showListFooter: false
+git:
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"

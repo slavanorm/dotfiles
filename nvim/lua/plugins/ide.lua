@@ -54,7 +54,7 @@ return {
           desc = 'Open Yank History',
         },
         -- stylua: ignore
-    { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+        { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
         { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Before Cursor' },
         { 'p', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Text Before Cursor' },
         { 'gP', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' }, desc = 'Put Text After Selection' },

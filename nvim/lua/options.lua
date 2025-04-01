@@ -1,8 +1,3 @@
-Keymap_opts = {
-  silent = true,
-  noremap = true,
-}
-
 vim.opt.spell = false
 -- Automatically save on buffer leave
 vim.api.nvim_create_autocmd('BufLeave', {
@@ -167,3 +162,16 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.opt.showtabline = 0
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+
+--[[
+-- Disable underlines for all highlight groups
+for _, group in ipairs(vim.fn.getcompletion('', 'highlight')) do
+  vim.api.nvim_set_hl(0, group, { underline = false })
+end
+--]]
+
+-- Disable underlines for LSP diagnostics
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false, bold = true })
+vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false, bold = true })

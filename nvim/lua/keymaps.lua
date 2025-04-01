@@ -35,36 +35,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window', unpack(Keymap_opts) })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window', unpack(Keymap_opts) })
 
---  Try it with ya*, e.g. yap in normal mode
-function Sort_by_mtime()
-  return require('telescope.sorters').new {
-    scoring_function = function(entry)
-      local path = entry.filename
-      if not path then
-        return 0
-      end
-
-      local stat = vim.loop.fs_stat(path)
-      return stat and stat.mtime.sec or 0
-    end,
-  }
-end
-
-local builtin = require 'telescope.builtin'
-vim.keymap.set('n', '<leader>sN', function()
-  builtin.live_grep {
-    cwd = vim.fn.stdpath 'config',
-    prompt_title = 'grep config',
-    sorter = Sort_by_mtime(),
-  }
-end, { unpack(Keymap_opts), desc = '[S]earch [N]eovim files (grep)' })
-
 vim.keymap.set('n', 'qq', ':qa<CR>', { desc = 'exit on q spam', unpack(Keymap_opts) })
 vim.keymap.set('n', 'q', '<Nop>', { desc = 'disable macros rec', unpack(Keymap_opts) })
 vim.keymap.set({ 'n', 'v', 'x' }, 'a', 'A', { desc = 'always append', unpack(Keymap_opts) })
 vim.keymap.set({ 'n', 'v', 'x' }, 'i', 'a', { desc = 'always append', unpack(Keymap_opts) })
-vim.keymap.set('n', '<leader>fl', function()
-  require('telescope.builtin').live_grep {
-    search_dirs = { vim.fn.stdpath 'data' .. '/lazy' },
-  }
-end, { desc = '[S]Grep [L]azy.nvim plugin contents' })
+

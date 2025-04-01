@@ -1,16 +1,3 @@
---[[
--- Disable underlines for all highlight groups
-for _, group in ipairs(vim.fn.getcompletion('', 'highlight')) do
-  vim.api.nvim_set_hl(0, group, { underline = false })
-end
---]]
-
--- Disable underlines for LSP diagnostics
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false })
-
 return {
   {
     'folke/zen-mode.nvim',

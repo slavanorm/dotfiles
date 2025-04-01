@@ -4,7 +4,59 @@
 -- This opens a window that shows you all of the keymaps for the current
 --  `:help telescope.setup()`
 --  :Telescope help_tags
-local builtin = require 'telescope.builtin'
+
+--  Try it with ya*, e.g. yap in normal mode
+function Sort_by_mtime()
+  return require('telescope.sorters').new {
+    scoring_function = function(entry)
+      local path = entry.filename
+      if not path then
+        return 0
+      end
+
+      local stat = vim.loop.fs_stat(path)
+      return stat and stat.mtime.sec or 0
+    end,
+  }
+end
+local defaults = {
+  --border = false,
+  layout_strategy = 'flex',
+  layout_config = {
+    flex = {
+      height = 0.80,
+      width = 0.95,
+      prompt_position = 'top',
+      flip_columns = 80,
+    },
+    horizontal = {
+      prompt_position = 'top',
+      height = 0.70,
+      width = 0.95,
+      preview_width = 40,
+      preview_cutoff = 80,
+    },
+    vertical = {
+      prompt_position = 'top',
+      height = 0.8,
+      width = 0.95,
+    },
+  },
+  initial_mode = 'normal',
+  pickers = {
+    colorscheme = {
+      enable_preview = true,
+    },
+  },
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
+}
+
+-- KEYMAPS BELOW
+
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -20,49 +72,14 @@ return {
         end,
       },
     },
-    opts = {
-      defaults = {
-        border = false, -- Disable borders
-        layout_strategy = 'flex',
-        layout_config = {
-          flex = {
-            height = 0.90,
-            width = 0.90,
-            prompt_position = 'top',
-            horizontal = {
-              prompt_position = 'top',
-              height = 0.60,
-              width = 0.90,
-              preview_width = 0.65,
-              preview_cutoff = 100,
-            },
-            vertical = {
-              prompt_position = 'top',
-              height = 0.80,
-              width = 0.7,
-              preview_cutoff = 55,
-            },
-          },
-        },
-      },
-      initial_mode = 'normal',
-      pickers = {
-        colorscheme = {
-          enable_preview = true,
-        },
-      },
-      extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown(),
-        },
-      },
-    },
     config = function()
-      require('telescope').setup {}
+      require('telescope').setup {
+        defaults = defaults,
+      }
+      local builtin = require 'telescope.builtin'
       -- Enable Telescope extensions only if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      -- See `:help telescope.builtin`
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -73,20 +90,27 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {})
       end, { desc = '[/] Fuzzily search in current buffer' })
-
-      -- It's also possible to pass additional configuration options.
-      --  See `:help telescope.builtin.live_grep()` for information about particular keys
       vim.keymap.set('n', '<leader>s/', function()
         builtin.live_grep {
           grep_open_files = true,
           prompt_title = 'Live Grep in Open Files',
         }
       end, { desc = '[S]earch [/] in Open Files' })
+      vim.keymap.set('n', '<leader>sN', function()
+        builtin.live_grep {
+          cwd = vim.fn.stdpath 'config',
+          prompt_title = 'grep config',
+          sorter = Sort_by_mtime(),
+        }
+      end, { unpack(Keymap_opts), desc = '[S]earch [N]eovim files (grep)' })
+      vim.keymap.set('n', '<leader>fl', function()
+        require('telescope.builtin').live_grep {
+          search_dirs = { vim.fn.stdpath 'data' .. '/lazy' },
+        }
+      end, { desc = '[S]Grep [L]azy.nvim plugin contents' })
     end,
   },
 }
