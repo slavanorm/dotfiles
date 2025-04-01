@@ -1,0 +1,27 @@
+[user]
+	name = slavanorm
+	email = 512f@bk.ru
+[core]
+	autocrlf = input
+	editor = nvim
+	packedGitLimit = 512m 
+	packedGitWindowSize = 512m 
+   pager = delta
+[pack] 
+	deltaCacheSize = 2047m 
+	packSizeLimit = 2047m 
+	windowMemory = 2047m
+[http]
+	postBuffer = 524288000  # Set buffer size to 500MB
+	lowSpeedLimit = 0      # Disable low-speed limit
+	lowSpeedTime = 999999 # Extend low-speed timeout
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+[interactive]
+    diffFilter = delta --color-only
+
+
+[merge]
+    conflictstyle = zdiff3
