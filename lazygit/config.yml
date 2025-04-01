@@ -1,3 +1,6 @@
+promptToReturnFromSubprocess: false
+disableStartupPopups: true
+quitOnTopLevelReturn: true
 os:
   editPreset: "nvim"
 gui:
@@ -9,5 +12,12 @@ gui:
   showFileIcons: false
   showCommandLog: false
   showListFooter: false
+  screenMode: half
+  border: hidden
+
+  showBottomLine: false
 git:
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
