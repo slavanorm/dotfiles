@@ -5,6 +5,7 @@ alias python=python3
 #HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
+export XDG_CONFIG_HOME="$HOME/.config"
 
 [ -z "$PS1" ] && return
 
@@ -32,3 +33,10 @@ export SAVEHIST=$HISTSIZE
 alias history="history 1"
 alias ls="ls -AFGSh"
 alias lazygit="lazygit -ucd ~/.config/lazygit"
+
+function cd() {
+   builtin cd $1
+   if [[ -d ./venv ]] ; then
+      . ./venv/bin/activate
+   fi
+}
