@@ -1,18 +1,19 @@
 promptToReturnFromSubprocess: false
 disableStartupPopups: true
 quitOnTopLevelReturn: true
+notARepository: skip
 os:
   editPreset: "nvim"
 gui:
-  nerdFontsVersion: "3"
-  skipNoStagedFilesWarning: false
+  nerdFontsVersion: ""
+  skipNoStagedFilesWarning: true
   sidePanelWidth: 0.4
   expandFocusedSidePanel: false
   showFileTree: false
   showFileIcons: false
   showCommandLog: false
   showListFooter: false
-  screenMode: half
+  screenMode: full
   border: hidden
 
   showBottomLine: false

@@ -32,7 +32,6 @@ export HISTFILESIZE=999999
 export SAVEHIST=$HISTSIZE
 alias history="history 1"
 alias ls="ls -AFGSh"
-alias lazygit="lazygit -ucd ~/.config/lazygit"
 
 function cd() {
    builtin cd $1
