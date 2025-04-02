@@ -118,7 +118,6 @@ return {
         DiagnosticVirtualTextWarn = makeDiagnosticColor(theme.diag.warning),
         DiagnosticVirtualTextError = makeDiagnosticColor(theme.diag.error),
         PmenuThumb = { bg = theme.ui.bg_p2 },
-        -- todo: this doesnt work
         TelescopeTitle = { fg = theme.ui.special },
         TelescopeBorder = { fg = false },
         TelescopePromptNormal = { bg = theme.ui.bg_p1 },
