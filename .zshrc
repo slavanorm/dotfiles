@@ -13,7 +13,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 zmodload zsh/complist
 
 # use the module above for autocomplete selection
-zstyle ':completion:*' menu yes select
+   zstyle ':completion:*' menu yes select
 
 setopt menucomplete
 # now we can define keybindings for complist module

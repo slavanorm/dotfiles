@@ -56,6 +56,7 @@ require('lazy').setup {
     },
   },
 }
-require 'options'
-require 'keymaps'
-require 'macros'
+require 'keymap'
+require 'autocommand'
+require 'macro'
+require 'option'

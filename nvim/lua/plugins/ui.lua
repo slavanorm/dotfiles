@@ -24,9 +24,9 @@ return {
       },
     },
     keys = { {
-      '<leader>tz',
+      '<leader>tzz',
       '<cmd>ZenMode<cr>',
-      desc = '[T]oggle [Z]en',
+      desc = '[z]en [z] narrow',
     } },
   },
   {
@@ -81,6 +81,7 @@ return {
       },
     },
   },
+  {},
   {
     'rebelot/kanagawa.nvim',
     config = function()
@@ -97,7 +98,6 @@ return {
           },
         },
       }
-      vim.cmd 'colorscheme kanagawa'
     end,
     overrides = function(colors)
       require 'telescope'
