@@ -1,5 +1,6 @@
 return {
-  {
+    { "nvim-lualine/lualine.nvim", enabled = false },
+   {
     'folke/zen-mode.nvim',
     opts = {
       window = {

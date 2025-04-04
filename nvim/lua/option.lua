@@ -93,3 +93,5 @@ vim.opt.whichwrap:append '<,>,h,l'
 --vim.opt.virtualedit = 'onemore'
 vim.opt.laststatus = 0
 vim.cmd 'colorscheme kanagawa'
+vim.opt.ls=0
+vim.opt.statusline = " "
