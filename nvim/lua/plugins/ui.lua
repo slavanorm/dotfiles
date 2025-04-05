@@ -32,6 +32,7 @@ return {
   },
   {
     'folke/snacks.nvim',
+      lazy=true,
     opts = {
       dashboard = {
         preset = {
@@ -85,6 +86,7 @@ return {
   {},
   {
     'rebelot/kanagawa.nvim',
+   lazy=true,
     config = function()
       require('kanagawa').setup {
         undercurl = false,

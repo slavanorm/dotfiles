@@ -1,4 +1,125 @@
+local root_dir = vim.fn.expand '%:h:p'
+
+local function setup_lsp()
+  -- note: diagnostics are not exclusive to lsp servers
+  -- so these can be global keybindings
+  vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+  vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+  vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    desc = 'LSP actions',
+    callback = function(event)
+      local opts = { buffer = event.buf }
+
+      -- these will be buffer-local keybindings
+      -- because they only work if you have an active language server
+
+      -- TODO: wtf these keymaps
+      vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+      vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+      vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+      vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+      vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+      vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+      vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+      vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+      vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+      vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    end,
+  })
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+  local cmp = require 'cmp'
+
+  cmp.setup {
+    sources = {
+      { name = 'nvim_lsp' },
+    },
+    mapping = cmp.mapping.preset.insert {
+      -- Enter key confirms completion item
+      ['<CR>'] = cmp.mapping.confirm { select = false },
+
+      -- Ctrl + space triggers completion menu
+      ['<C-Space>'] = cmp.mapping.complete(),
+    },
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
+  }
+  local c = require 'lspconfig'
+  -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
+  c.ruff.setup { root_dir = root_dir, capabilities = capabilities }
+  c.lua_ls.setup {}
+  c.basedpyright.setup {
+    capabilities = capabilities,
+    root_dir = root_dir,
+    settings = {
+      disableOrganizeImports = true,
+      basedpyright = {
+        analysis = {
+          -- ignore = { "*" },
+          typeCheckingMode = 'standard',
+          analyzeUnannotatedFunctions = true,
+          diagnosticMode = 'openFilesOnly',
+          reportGeneralTypeIssues = true,
+          useLibraryCodeForTypes = true,
+          reportImportCycles = true,
+          inlayHints = {
+            callArgumentNames = true,
+          },
+          reportUnusedImport = false,
+          reportUnusedClass = false,
+          reportUnusedFunction = false,
+          reportUnusedVariable = false,
+          reportDuplicateImport = false,
+          reportAttributeAccessIssue = false,
+          pythonVersion = 3.11,
+        },
+      },
+    },
+  }
+end
+
 return {
+  'hrsh7th/cmp-nvim-lsp',
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      setup_lsp()
+    end,
+    dependencies = {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = '~/.local/share/nvim' },
+        'LazyVim',
+      },
+      'neovim/nvim-lspconfig',
+      'hrsh7th/nvim-cmp',
+      'hrsh7th/cmp-nvim-lsp',
+      'neovim/nvim-treesitter',
+      --'williamboman/mason.nvim',
+    },
+  },
+  {
+    'neovim/nvim-treesitter',
+    config = function()
+      local c = require 'nvim-treesitter'
+      c.setup {
+        ensure_installed = { 'help', 'lua', 'python' },
+        auto_install = true,
+        highlight = {
+          enable = true,
+        },
+      }
+    end,
+  },
   {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
@@ -27,6 +148,7 @@ return {
   },
   {
     'stevearc/conform.nvim',
+    enabled = false,
     opts = {
       formatters_by_ft = {
         python = { 'ruff_fix', 'black', 'isort' },
@@ -53,7 +175,8 @@ return {
           mode = { 'n', 'x' },
           desc = 'Open Yank History',
         },
-        -- stylua: ignore
+        -- TODO: move to keymaps
+            -- stylua: ignore
         { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
         { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Before Cursor' },
         { 'p', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put Text Before Cursor' },
@@ -115,7 +238,7 @@ return {
       },
 
       -- experimental signature help support
-      -- signature = { enabled = true },
+      signature = { enabled = true },
 
       sources = {
         -- adding any nvim-cmp sources here will enable them
@@ -133,15 +256,5 @@ return {
         ['<C-y>'] = { 'select_and_accept' },
       },
     },
-  },
-  {
-    'williamboman/mason.nvim',
-    config = function()
-      require('mason').setup {
-        providers = {
-          pyright = false,
-        },
-      }
-    end,
   },
 }

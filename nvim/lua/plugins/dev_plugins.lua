@@ -39,7 +39,7 @@ return {
         plugins = {
           non_standalone = true,
         },
-        --console = { open_on_runcode = false },
+        console = { open_on_runcode = false },
         dir = 'col',
         keys = { toggle = { 'x' } },
         description = { position = 'bottom', show_stats = false },

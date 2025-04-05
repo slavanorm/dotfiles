@@ -95,3 +95,4 @@ vim.opt.laststatus = 0
 vim.cmd 'colorscheme kanagawa'
 vim.opt.ls=0
 vim.opt.statusline = " "
+vim.g.python3_host_prog = 'python3' --'/opt/homebrew/bin/python3.11'

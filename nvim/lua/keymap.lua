@@ -35,12 +35,9 @@ Map('[z]en [w]ide toggle', 'n', '<leader>tzw', function()
 end)
 
 -- has some sense
-Map('yankless d', { 'n', 'v', 'x' }, 'd', '"_d')
-Map('yankless x', { 'n', 'v', 'x' }, 'x', '"_x')
+Map('yankless d', { 'n', 'v', 'x' }, 'd', '"_d', { noremap = false })
+Map('yankless x', { 'n', 'v', 'x' }, 'x', '"_x', { noremap = false })
 Map('Y keeps V', 'v', 'y', 'ygv') -- good since i changed d
-
-Map('cw fix', 'n', 'cw', 'ciw')
-Map('dw fix', 'n', 'dw', 'diw')
 
 Map('tab', 'n', '<Tab>', '>>')
 Map('tab', 'v', '<Tab>', '>gv')
@@ -64,6 +61,13 @@ Map('w^ focus', 'n', '<C-k>', '<C-w><C-k>')
 Map('W casesensitive', { 'n', 'v' }, 'w', '<Plug>CamelCaseMotion_w')
 Map('B casesensitive', { 'n', 'v' }, 'b', '<Plug>CamelCaseMotion_b')
 Map('E casesensitive', { 'n', 'v' }, 'e', '<Plug>CamelCaseMotion_e')
+
+-- TODO: not complete
+Map('cw fix', 'n', 'cw', 'ciw')
+Map('dw fix', 'n', 'dw', 'diw')
+
+Map('cw fix', 'n', 'cwp', 'ciwp')
+Map('dw fix', 'n', 'dwp', 'diwp')
 
 Map('[q]uickfixlist', 'n', '<leader>q', vim.diagnostic.setloclist)
 Map('[c]olorscheme', { 'n', 'v' }, '<leader>tc', function()

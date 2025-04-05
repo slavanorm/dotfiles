@@ -1,4 +1,5 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
+alias sys_python=/usr/bin/python3
 alias python3=python3.11
 alias python=python3
 #HOMEBREW_NO_AUTO_UPDATE=1
