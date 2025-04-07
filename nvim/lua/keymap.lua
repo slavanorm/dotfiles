@@ -1,4 +1,8 @@
 -- Keymaps, ordered from opinionated to common sense
+-- TODO:
+-- keymaps are overriden after load
+-- remap K which is man cword
+
 function Map(desc, mode, lhs, rhs, opts)
   opts = opts or {}
   opts.noremap = opts.noremap == nil and true or opts.noremap
@@ -7,14 +11,17 @@ function Map(desc, mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+Map('auto[H]over t', 'n', '<leader>th', ':ToggleAutoHover<CR>')
+
 Map('v always multiline', 'v', '<leader>V', 'V')
 
 Map('append1', { 'n', 'v', 'x' }, 'a', 'A')
 Map('append2', { 'n', 'v', 'x' }, 'i', 'a')
+Map('0->^', { 'n', 'v', 'x' }, '0', '^')
 
-Map('N newline', 'n', 'K', 'i<cr><Esc>')
+Map('N newline', 'n', 'K', 'i<CR><Esc>')
 
-Map('BS 2 lead', 'n', '<BS>', '<leader><leader>')
+Map('yank and del', 'n', 'yd', 'yydd')
 
 Map('qq exit', 'n', 'qq', ':qa<CR>')
 Map('q macros off', 'n', 'q', '<Nop>')
@@ -23,17 +30,16 @@ Map('I/N modes toggle', { 'n', 'i' }, '<Down>', function()
   r = vim.api.nvim_get_mode().mode == 'n' and 'i' or '<Esc>'
   return r
 end, { expr = true })
-Map('[Line] toggle', 'n', '<leader>tl', function()
+Map('[Line] t', 'n', '<leader>tl', function()
   vim.opt.laststatus = vim.opt.laststatus:get() == 0 and 2 or 0
 end)
 
-Map('[z]en [w]ide toggle', 'n', '<leader>tzw', function()
+Map('[z]en [w]ide t', 'n', '<leader>tzw', function()
   vim.opt.laststatus = vim.opt.laststatus:get() == 0 and 2 or 0
   vim.opt.number = vim.opt.laststatus:get() == 0
   vim.opt.relativenumber = vim.opt.laststatus:get() == 0
   print('Status ' .. (vim.opt.laststatus:get() == 0 and 'hidden' or 'shown'))
 end)
-
 -- has some sense
 Map('yankless d', { 'n', 'v', 'x' }, 'd', '"_d', { noremap = false })
 Map('yankless x', { 'n', 'v', 'x' }, 'x', '"_x', { noremap = false })
@@ -62,21 +68,22 @@ Map('W casesensitive', { 'n', 'v' }, 'w', '<Plug>CamelCaseMotion_w')
 Map('B casesensitive', { 'n', 'v' }, 'b', '<Plug>CamelCaseMotion_b')
 Map('E casesensitive', { 'n', 'v' }, 'e', '<Plug>CamelCaseMotion_e')
 
--- TODO: not complete
 Map('cw fix', 'n', 'cw', 'ciw')
 Map('dw fix', 'n', 'dw', 'diw')
 
-Map('cw fix', 'n', 'cwp', 'ciwp')
-Map('dw fix', 'n', 'dwp', 'diwp')
+Map('cw fix', 'n', 'cwp', 'ciw<Esc>p')
+Map('dw fix', 'n', 'dwp', 'diw<Esc>p')
 
 Map('[q]uickfixlist', 'n', '<leader>q', vim.diagnostic.setloclist)
 Map('[c]olorscheme', { 'n', 'v' }, '<leader>tc', function()
   require('telescope.builtin').colorscheme {
-    enable_preview = true, -- Show live preview
+    enable_preview = true,
   }
 end)
 
 local builtin = require 'telescope.builtin'
+Map('BS buffers', 'n', '<BS>', builtin.buffers)
+
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -86,7 +93,7 @@ vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]re
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+Map('[ ] Find existing buffers', 'n', '<leader><leader>', builtin.buffers)
 vim.keymap.set('n', '<leader>/', function()
   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {})
 end, { desc = '[/] Fuzzily search in current buffer' })

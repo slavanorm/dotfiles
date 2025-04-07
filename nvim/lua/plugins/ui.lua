@@ -1,6 +1,15 @@
 return {
-    { "nvim-lualine/lualine.nvim", enabled = false },
-   {
+  { 'nvim-lualine/lualine.nvim', enabled = false },
+  {
+    'echasnovski/mini.animate',
+    event = 'VeryLazy',
+    opts = function(_, opts)
+      opts.scroll = {
+        enable = false,
+      }
+    end,
+  },
+  {
     'folke/zen-mode.nvim',
     opts = {
       window = {
@@ -32,7 +41,7 @@ return {
   },
   {
     'folke/snacks.nvim',
-      lazy=true,
+    lazy = true,
     opts = {
       dashboard = {
         preset = {
@@ -86,7 +95,7 @@ return {
   {},
   {
     'rebelot/kanagawa.nvim',
-   lazy=true,
+    lazy = true,
     config = function()
       require('kanagawa').setup {
         undercurl = false,

@@ -95,4 +95,9 @@ vim.opt.laststatus = 0
 vim.cmd 'colorscheme kanagawa'
 vim.opt.ls=0
 vim.opt.statusline = " "
+-- set to sys python.. can 
 vim.g.python3_host_prog = 'python3' --'/opt/homebrew/bin/python3.11'
+-- Set a shorter updatetime for quicker hover response
+vim.opt.updatetime = 1000
+
+

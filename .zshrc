@@ -2,14 +2,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias sys_python=/usr/bin/python3
 alias python3=python3.11
 alias python=python3
+alias pip='python3.11 -m pip'
+alias browse_epam="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --profile-directory='Profile1'"
+
 #HOMEBREW_NO_AUTO_UPDATE=1
 #HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 export XDG_CONFIG_HOME="$HOME/.config"
 
+alias n=nvim
 [ -z "$PS1" ] && return
 
+export PS1=" %1~ >"
 # load module for list-style selection
 zmodload zsh/complist
 

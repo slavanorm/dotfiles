@@ -14,9 +14,7 @@ local function setup_lsp()
 
       -- these will be buffer-local keybindings
       -- because they only work if you have an active language server
-
-      -- TODO: wtf these keymaps
-      vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+      -- todo: document these? move to keymaps?
       vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
       vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
       vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
@@ -51,39 +49,24 @@ local function setup_lsp()
   }
   local c = require 'lspconfig'
   -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
-  c.ruff.setup { root_dir = root_dir, capabilities = capabilities }
-  c.lua_ls.setup {}
-  c.basedpyright.setup {
-    capabilities = capabilities,
-    root_dir = root_dir,
-    settings = {
-      disableOrganizeImports = true,
-      basedpyright = {
-        analysis = {
-          -- ignore = { "*" },
-          typeCheckingMode = 'standard',
-          analyzeUnannotatedFunctions = true,
-          diagnosticMode = 'openFilesOnly',
-          reportGeneralTypeIssues = true,
-          useLibraryCodeForTypes = true,
-          reportImportCycles = true,
-          inlayHints = {
-            callArgumentNames = true,
-          },
-          reportUnusedImport = false,
-          reportUnusedClass = false,
-          reportUnusedFunction = false,
-          reportUnusedVariable = false,
-          reportDuplicateImport = false,
-          reportAttributeAccessIssue = false,
-          pythonVersion = 3.11,
-        },
-      },
-    },
-  }
+  --c.ruff.setup { capabilities = capabilities }
+  c.lua_ls.setup { capabilities = capabilities }
+  c.pylsp.setup { root_dir = root_dir, capabilities = capabilities }
 end
 
 return {
+  {
+    'folke/noice.nvim',
+    opts = function(_, opts)
+      table.insert(opts.routes, {
+        filter = {
+          event = 'notify',
+          find = 'No information available',
+        },
+        opts = { skip = true },
+      })
+    end,
+  },
   'hrsh7th/cmp-nvim-lsp',
   {
     'neovim/nvim-lspconfig',
@@ -104,7 +87,6 @@ return {
       'hrsh7th/nvim-cmp',
       'hrsh7th/cmp-nvim-lsp',
       'neovim/nvim-treesitter',
-      --'williamboman/mason.nvim',
     },
   },
   {
@@ -119,6 +101,11 @@ return {
         },
       }
     end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter' },
+    opts = { max_lines = 1 },
   },
   {
     'ThePrimeagen/harpoon',
@@ -148,10 +135,9 @@ return {
   },
   {
     'stevearc/conform.nvim',
-    enabled = false,
     opts = {
       formatters_by_ft = {
-        python = { 'ruff_fix', 'black', 'isort' },
+        python = { 'ruff_fix' },
         go = { 'gofumpt', 'goimports', 'goimports-reviser', 'golines' },
         sql = { 'sqlfmt' },
       },
@@ -254,6 +240,37 @@ return {
       keymap = {
         preset = 'enter',
         ['<C-y>'] = { 'select_and_accept' },
+      },
+    },
+  },
+  {
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      keywords = {
+        FIX = {
+          alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE', 'fixme' },
+        },
+        TODO = { alt = { 'todo' } },
+      },
+      colors = {
+        error = { 'DiagnosticError', 'ErrorMsg', '#DC2626' },
+        warning = { 'DiagnosticWarn', 'WarningMsg', '#FBBF24' },
+        info = { 'DiagnosticInfo', '#2563EB' },
+        hint = { 'DiagnosticHint', '#10B981' },
+        default = { 'Identifier', '#7C3AED' },
+        test = { 'Identifier', '#FF00FF' },
+      },
+      search = {
+        command = 'rg',
+        args = {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+        },
+        pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
       },
     },
   },

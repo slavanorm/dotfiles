@@ -47,6 +47,35 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+-- Global autocmd for hover
+vim.g.auto_hover_enabled = false -- default
+
+vim.api.nvim_create_user_command('ToggleAutoHover', function()
+  vim.g.auto_hover_enabled = not vim.g.auto_hover_enabled
+  print('Auto-hover ' .. (vim.g.auto_hover_enabled and 'enabled' or 'disabled'))
+end, {})
+
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  callback = function()
+    if not vim.g.auto_hover_enabled then
+      return
+    end
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_active_clients { bufnr = bufnr }
+    for _, client in ipairs(clients) do
+      if client.server_capabilities.hoverProvider then
+        vim.lsp.buf.hover()
+        vim.schedule(function()
+          -- Refocus
+          vim.api.nvim_set_current_win(0)
+        end)
+        -- exits after first provider returned hover
+        return
+      end
+    end
+  end,
+})
+
 --[[
 -- override keymaps on bufenter
 vim.api.nvim_create_autocmd('BufEnter', {
