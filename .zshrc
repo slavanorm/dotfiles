@@ -16,11 +16,14 @@ alias n=nvim
 
 export PS1=" %1~ >"
 # load module for list-style selection
+autoload -Uz compinit
+compinit
 zmodload zsh/complist
 
 # use the module above for autocomplete selection
-zstyle ':completion:*' menu yes select
-
+#zstyle ':completion:*' menu yes select
+zstyle ':completion:*' file-list all
+zstyle ':completion:*' file-sort access follow
 setopt menucomplete
 # now we can define keybindings for complist module
 # you want to trigger search on autocomplete items

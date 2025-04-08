@@ -1,5 +1,10 @@
 local root_dir = vim.fn.expand '%:h:p'
 
+local function x ()
+   
+end
+
+
 local function setup_lsp()
   -- note: diagnostics are not exclusive to lsp servers
   -- so these can be global keybindings
@@ -55,7 +60,15 @@ local function setup_lsp()
 end
 
 return {
-  {
+   {
+'mfussenegger/nvim-dap',
+dependencies={
+'rcarriga/nvim-dap-ui',
+'theHamsta/nvim-dap-virtual-text',
+}
+   },
+
+   {
     'folke/noice.nvim',
     opts = function(_, opts)
       table.insert(opts.routes, {
@@ -68,6 +81,7 @@ return {
     end,
   },
   'hrsh7th/cmp-nvim-lsp',
+  'L3MON4D3/LuaSnip',
   {
     'neovim/nvim-lspconfig',
     config = function()

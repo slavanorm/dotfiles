@@ -68,14 +68,13 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
   border = 'none',
 })
 
-
 vim.opt.showtabline = 0
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 -- Disable underlines for all highlight groups
 for _, group in ipairs(vim.fn.getcompletion('', 'highlight')) do
-  vim.api.nvim_set_hl(0, group, { underline = false ,bold=true})
+  vim.api.nvim_set_hl(0, group, { underline = false, bold = true })
 end
 
 -- Disable underlines for LSP diagnostics
@@ -84,20 +83,17 @@ vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false, bold = tr
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false, bold = true })
 vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false, bold = true })
 
-
 -- Allow h and l to wrap across lines
 vim.opt.whichwrap:append '<,>,h,l'
 
 -- Allow the cursor to move one character beyond the EOL
 --Map('sticky EOL', 'n', '$', 'g_')
 --vim.opt.virtualedit = 'onemore'
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.cmd 'colorscheme kanagawa'
-vim.opt.ls=0
-vim.opt.statusline = " "
--- set to sys python.. can 
+vim.opt.ls = 0
+vim.opt.statusline = ' '
+-- set to sys python.. can
 vim.g.python3_host_prog = 'python3' --'/opt/homebrew/bin/python3.11'
 -- Set a shorter updatetime for quicker hover response
 vim.opt.updatetime = 1000
-
-
