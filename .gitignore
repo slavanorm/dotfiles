@@ -1,7 +1,6 @@
 
 .DS_Store
-**/lazy-lock.json
-**/lazyvim.json
+nvim/*.json
 containers/
 gcloud
 gtk-2.0/
