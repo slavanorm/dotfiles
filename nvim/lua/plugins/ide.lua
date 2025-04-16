@@ -83,7 +83,7 @@ return {
     {
         'mfussenegger/nvim-dap',
         enabled=false,
-        --ft={'python'},
+        ft={'python'},
         dependencies = {
             'nvim-neotest/nvim-nio',
             'leoluz/nvim-dap-go',
