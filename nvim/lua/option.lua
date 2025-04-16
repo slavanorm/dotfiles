@@ -49,9 +49,9 @@ vim.o.lazyredraw = false
 vim.o.shada = "'100,<50,s10,h"
 
 -- Global settings
-vim.opt.tabstop = 3 -- Display tabs as 3 spaces
-vim.opt.shiftwidth = 3 -- Use 2 spaces for indentation
-vim.opt.softtabstop = 3 -- Make <Tab> behave as 2 spaces
+vim.opt.tabstop = 4 -- Display tabs as 3 spaces
+vim.opt.shiftwidth = 4 -- Use 2 spaces for indentation
+vim.opt.softtabstop = 4 -- Make <Tab> behave as 2 spaces
 vim.o.formatoptions = vim.o.formatoptions .. 't'
 vim.o.expandtab = true
 
@@ -91,9 +91,12 @@ vim.opt.whichwrap:append '<,>,h,l'
 --vim.opt.virtualedit = 'onemore'
 vim.opt.laststatus = 3
 vim.cmd 'colorscheme kanagawa'
-vim.opt.ls = 0
-vim.opt.statusline = ' '
--- set to sys python.. can
-vim.g.python3_host_prog = 'python3' --'/opt/homebrew/bin/python3.11'
+vim.opt.statusline = '%t '
+-- set to sys python
+vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
 -- Set a shorter updatetime for quicker hover response
 vim.opt.updatetime = 1000
+vim.g.lazyvim_python_lsp = 'pylsp'
+
+vim.o.switchbuf='usetab' 
+vim.o.tabpagemax = 20 

@@ -26,6 +26,10 @@ end
 --]]
 vim.opt.rtp:prepend(lazypath)
 
+require 'macro'
+
+
+
 -- import all plugins
 require('lazy').setup {
   spec = {
@@ -56,7 +60,11 @@ require('lazy').setup {
     },
   },
 }
+
+
+
 require 'keymap'
 require 'autocommand'
-require 'macro'
 require 'option'
+
+require 'persistence'.load()

@@ -4,6 +4,7 @@ alias python3=python3.11
 alias python=python3
 alias pip='python3.11 -m pip'
 alias browse_epam="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --profile-directory='Profile1'"
+alias air=~/go/bin/air 
 
 #HOMEBREW_NO_AUTO_UPDATE=1
 #HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
@@ -24,6 +25,7 @@ zmodload zsh/complist
 #zstyle ':completion:*' menu yes select
 zstyle ':completion:*' file-list all
 zstyle ':completion:*' file-sort access follow
+set completion-ignore-case on
 setopt menucomplete
 # now we can define keybindings for complist module
 # you want to trigger search on autocomplete items

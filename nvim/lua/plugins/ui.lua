@@ -29,28 +29,22 @@ return {
         options = {
           ruler = false,
           showcmd = false,
-          laststatus = 0,
         },
       },
     },
-    keys = { {
-      '<leader>tzz',
-      '<cmd>ZenMode<cr>',
-      desc = '[z]en [z] narrow',
-    } },
   },
   {
     'folke/snacks.nvim',
     lazy = false,
-    opts = {
+        opts = {
       dashboard = {
         preset = {
           keys = {
-            { icon = ' ', key = 'q', desc = 'Quit', action = ':qa' },
+            { icon = '', key = 'q', desc = '', action = ':qa' },
           },
           --header = [[123],[456]],
         },
-        width = 40,
+        width = 48,
         formats = {
           key = function(item)
             return { { '[', hl = 'special' }, { item.key, hl = 'key' }, { ']', hl = 'special' } }
@@ -58,10 +52,10 @@ return {
         },
         sections = {
           { section = 'recent_files', cwd = true, limit = 4, padding = 1 },
-          { section = 'projects' },
-          { section = 'keys' },
+          { section = 'projects' ,padding=1},
+          { section = 'keys' ,padding=1},
           { section = 'terminal', cmd = 'date +"%H:%M %d.%M %V/51"', padding = 1 },
-          { section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.1 -l -M 10 -b 2' },
+          --{ section = 'terminal', hl = 'footer', cmd = 'cbonsai -l -t 0.1 -l -M 10 -b 2' },
           --{ section = 'recent_files', limit = 4, padding = 1 },
         },
       },
@@ -77,12 +71,12 @@ return {
       },
       notifier = {
         enabled = true,
-        timeout = 6000,
+        timeout = 3000,
       },
       quickfile = { enabled = true },
       styles = {
         notification = {
-          wo = { wrap = true }, -- Wrap notifications
+          wo = { wrap = false }, -- Wrap notifications
           relative = 'editor',
         },
         snacks_image = {
@@ -92,7 +86,6 @@ return {
       },
     },
   },
-  {},
   {
     'rebelot/kanagawa.nvim',
     lazy = true,
