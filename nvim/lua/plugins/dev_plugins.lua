@@ -11,6 +11,7 @@ end
 
 if not dir_exists(lc_dir) then
     vim.notify 'work'
+    vim.o.signcolumn ='auto'
     return {
         'harrisoncramer/gitlab.nvim',
         dependencies = {
