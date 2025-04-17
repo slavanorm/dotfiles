@@ -10,10 +10,25 @@ local function dir_exists(path)
 end
 
 if not dir_exists(lc_dir) then
-    return {}
+    vim.notify 'work'
+    return {
+        'harrisoncramer/gitlab.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+            'stevearc/dressing.nvim', --optional
+        },
+        build = function()
+            -- build go lib
+            require('gitlab.server').build(true)
+        end,
+        config = function()
+            require('gitlab').setup()
+        end
+    }
 end
 
-vim.notify 'Loaded local plugins'
 
 return {
     {
@@ -31,8 +46,8 @@ return {
         config = function()
             vim.opt.statusline = ''
             vim.opt.laststatus = 0
-            
-            
+
+
             require('leetcode').setup {
                 storage = {
                     home = os.getenv 'HOME' .. '/.leetcode',
@@ -48,7 +63,6 @@ return {
                 keys = { toggle = { 'x' } },
                 description = { position = 'bottom', show_stats = false },
             }
-
         end,
     },
 }

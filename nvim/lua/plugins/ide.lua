@@ -81,9 +81,16 @@ end
 
 return {
     {
+        "andythigpen/nvim-coverage",
+        version = "*",
+        opts = {
+            auto_reload = true,
+        },
+    },
+    {
         'mfussenegger/nvim-dap',
-        enabled=false,
-        ft={'python'},
+        enabled = false,
+        ft = { 'python' },
         dependencies = {
             'nvim-neotest/nvim-nio',
             'leoluz/nvim-dap-go',
@@ -141,7 +148,7 @@ return {
     'L3MON4D3/LuaSnip',
     {
         'neovim/nvim-lspconfig',
-        lazy=false,
+        lazy = false,
         config = function()
             setup_lsp()
         end,
@@ -349,7 +356,7 @@ return {
     },
     {
         'williamboman/mason.nvim',
-        enabled=false
+        enabled = false
         --todo: fix to work for lua. works for python already.
     },
 }
