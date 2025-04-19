@@ -2,8 +2,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 Keymap_opts = {
-  silent = true,
-  noremap = true,
+    silent = true,
+    noremap = true,
 }
 
 -- lazy.nvim import (uncomment to download)
@@ -32,33 +32,33 @@ require 'macro'
 
 -- import all plugins
 require('lazy').setup {
-  spec = {
-    { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
-    { import = 'plugins' },
-  },
-  defaults = {
-    lazy = false,
-    version = false,
-  },
-  checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
-  performance = {
-    rtp = {
-      -- disable some rtp plugins
-      disabled_plugins = {
-        'gzip',
-        'matchit',
-        'matchparen',
-        'netrwPlugin',
-        'tarPlugin',
-        'tohtml',
-        'tutor',
-        'zipPlugin',
-      },
+    spec = {
+        { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
+        { import = 'plugins' },
     },
-  },
+    defaults = {
+        lazy = false,
+        version = false,
+    },
+    checker = {
+        enabled = true, -- check for plugin updates periodically
+        notify = false, -- notify on update
+    },              -- automatically check for plugin updates
+    performance = {
+        rtp = {
+            -- disable some rtp plugins
+            disabled_plugins = {
+                'gzip',
+                'matchit',
+                'matchparen',
+                'netrwPlugin',
+                'tarPlugin',
+                'tohtml',
+                'tutor',
+                'zipPlugin',
+            },
+        },
+    },
 }
 
 
@@ -67,4 +67,3 @@ require 'keymap'
 require 'autocommand'
 require 'option'
 
-require 'persistence'.load()

@@ -85,4 +85,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
     end,
 })
 
-
+vim.api.nvim_create_autocmd('VimEnter', {
+    callback = function()
+        -- load plugin only when invoked with path
+        if #vim.v.argv > 2 then
+            require 'persistence'.load()
+        end
+    end
+})

@@ -1,4 +1,4 @@
-local lc_dir = vim.fn.expand '~/Py/nvim/'
+local dev_dir = vim.fn.expand '~/Py/nvim/'
 
 local function dir_exists(path)
     local f = io.open(path, 'r')
@@ -9,7 +9,7 @@ local function dir_exists(path)
     return false
 end
 
-if not dir_exists(lc_dir) then
+if not dir_exists(dev_dir) then
     vim.notify 'work'
     vim.o.signcolumn ='auto'
     return {
@@ -34,7 +34,7 @@ end
 return {
     {
         'slavanorm/leetcode.nvim',
-        dir = lc_dir .. '/leetcode.nvim/',
+        dir = dev_dir .. '/leetcode.nvim/',
         dev = true,
         build = ':TSUpdate html',
         dependencies = {
