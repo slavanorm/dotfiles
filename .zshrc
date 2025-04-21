@@ -4,7 +4,8 @@ alias python3=python3.11
 alias python=python3
 alias pip='python3.11 -m pip'
 alias browse_epam="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --profile-directory='Profile1'"
-alias air=~/go/bin/air 
+alias lc="n lc"
+alias l=lazygit
 
 #HOMEBREW_NO_AUTO_UPDATE=1
 #HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1

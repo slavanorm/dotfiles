@@ -35,12 +35,18 @@ return {
     },
     {
         'folke/snacks.nvim',
-        lazy = false,
         opts = {
+            explorer = {
+                replace_netrw = false
+            },
             picker = {
-                sources = { files = { hidden = true, ignored = true } },
+                sources = {
+                    files = { hidden = true, ignored = true },
+                    explorer = { tree = false },
+
+                },
                 hidden = true,
-                ignored = true
+                ignored = true,
             },
             dashboard = {
                 preset = {

@@ -11,14 +11,15 @@ end
 
 if not dir_exists(dev_dir) then
     vim.notify 'work'
-    vim.o.signcolumn ='auto'
+    vim.o.signcolumn = 'auto'
     return {
         'harrisoncramer/gitlab.nvim',
         dependencies = {
             'MunifTanjim/nui.nvim',
             'nvim-lua/plenary.nvim',
             'sindrets/diffview.nvim',
-            'stevearc/dressing.nvim', --optional
+            'stevearc/dressing.nvim' --optional
+
         },
         build = function()
             -- build go lib
@@ -43,7 +44,10 @@ return {
             'nvim-lua/plenary.nvim',
             'MunifTanjim/nui.nvim',
             'folke/snacks.nvim',
-        },
+            {
+                'mfussenegger/nvim-dap',
+                enabled = false
+            } },
         config = function()
             vim.opt.statusline = ''
             vim.opt.laststatus = 0
