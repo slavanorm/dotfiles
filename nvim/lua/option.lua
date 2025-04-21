@@ -98,6 +98,6 @@ vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
 vim.opt.updatetime = 1000
 vim.g.lazyvim_python_lsp = 'pylsp'
 
-vim.o.switchbuf='usetab' 
+--vim.o.switchbuf='usetab' 
 vim.opt_local.spell =false
 vim.o.tabpagemax = 20 

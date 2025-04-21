@@ -9,6 +9,7 @@ function Map(desc, mode, lhs, rhs, opts)
     opts.noremap = opts.noremap == nil and true or opts.noremap
     opts.silent = opts.silent == nil and true or opts.silent
     opts.desc = desc
+    -- todo: wk.add instead
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 

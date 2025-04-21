@@ -89,29 +89,36 @@ return {
     },
     {
         'mfussenegger/nvim-dap',
-        enabled = false,
+        enabled = true,
         ft = { 'python' },
         dependencies = {
-            'nvim-neotest/nvim-nio',
+            {
+                'igorlfs/nvim-dap-view',
+                opts = {
+                    winbar = {
+                        sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
+                        headers = {
+                            breakpoints = "bp",
+                            scopes = "scope",
+                            exceptions = "exc",
+                            watches = "watch",
+                            threads = "thread",
+                            repl = "repl",
+                            console = "c",
+                        },
+                    },
+                }
+            }, 'nvim-neotest/nvim-nio',
             'leoluz/nvim-dap-go',
-            'rcarriga/nvim-dap-ui',
             'theHamsta/nvim-dap-virtual-text',
             'mfussenegger/nvim-dap-python',
         },
         config = function()
             local dap = require 'dap'
-            local ui = require 'dapui'
             require('dap-python').setup '/opt/homebrew/bin/python3.11'
-
-            ui.setup()
-            require('dap-go').setup()
-
+            local ui = require 'dap-view'
             Map('[B]p line dbg', 'n', '<leader>bB', dap.toggle_breakpoint)
-            Map('eval cursor', 'n', '<leader>bE', function()
-                ui.eval(nil, { enter = true })
-            end)
-            Map('de[B]ug to cursor', 'n', '<leader>gb', dap.run_to_cursor)
-
+            Map('de[b]ug to cursor', 'n', '<leader>gb', dap.run_to_cursor)
             vim.keymap.set('n', '<F1>', dap.continue)
             vim.keymap.set('n', '<F2>', dap.step_into)
             vim.keymap.set('n', '<F3>', dap.step_over)
@@ -119,6 +126,12 @@ return {
             vim.keymap.set('n', '<F5>', dap.step_back)
             vim.keymap.set('n', '<F12>', dap.restart)
 
+            --[[
+            --require('dap-go').setup()
+            Map('eval cursor', 'n', '<leader>bE', function()
+                ui.eval(nil, { enter = true })
+            end)
+            --]]
             dap.listeners.before.attach.dapui_config = function()
                 ui.open()
             end
@@ -357,6 +370,5 @@ return {
     {
         'williamboman/mason.nvim',
         enabled = false
-        --todo: fix to work for lua. works for python already.
     },
 }
