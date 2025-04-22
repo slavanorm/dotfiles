@@ -99,7 +99,6 @@ return {
     },
     {
         'rebelot/kanagawa.nvim',
-        lazy = true,
         config = function()
             require('kanagawa').setup {
                 undercurl = false,
@@ -108,7 +107,7 @@ return {
                     theme = {
                         all = {
                             ui = {
-                                bg='#000000',
+                                bg = '#000000',
                                 bg_gutter = 'none',
                             },
                         },
@@ -122,6 +121,7 @@ return {
                 local c = require 'kanagawa.lib.color'
                 return { fg = color, bg = c(color):blend(theme.ui.bg, 0.95):to_hex() }
             end
+
             local theme = colors.theme
             return {
                 NormalFloat = { bg = 'none' },

@@ -1,3 +1,4 @@
+vim.cmd 'colorscheme kanagawa'
 vim.opt.spell = false
 -- Disable confirmation prompts
 vim.opt.confirm = false
@@ -49,8 +50,8 @@ vim.o.lazyredraw = false
 vim.o.shada = "'100,<50,s10,h"
 
 -- Global settings
-vim.opt.tabstop = 4 -- Display tabs as 3 spaces
-vim.opt.shiftwidth = 4 -- Use 2 spaces for indentation
+vim.opt.tabstop = 4     -- Display tabs as 3 spaces
+vim.opt.shiftwidth = 4  -- Use 2 spaces for indentation
 vim.opt.softtabstop = 4 -- Make <Tab> behave as 2 spaces
 vim.o.formatoptions = vim.o.formatoptions .. 't'
 vim.o.expandtab = true
@@ -61,11 +62,11 @@ vim.opt.wrap = true
 
 -- Disable borders for all floating windows
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'none',
+    border = 'none',
 })
 
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = 'none',
+    border = 'none',
 })
 
 vim.opt.showtabline = 0
@@ -73,15 +74,26 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 -- Disable underlines for all highlight groups
-for _, group in ipairs(vim.fn.getcompletion('', 'highlight')) do
-  vim.api.nvim_set_hl(0, group, { underline = false, bold = true })
+-- Helper function to update a highlight group
+local function disable_underline(group)
+  local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+  vim.api.nvim_set_hl(0, group, {
+    fg = hl.fg,
+    bg = hl.bg,
+    bold = hl.bold,
+    italic = false, 
+    underline = false,
+  })
 end
 
--- Disable underlines for LSP diagnostics
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineError', { underline = false, bold = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineWarn', { underline = false, bold = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineInfo', { underline = false, bold = true })
-vim.api.nvim_set_hl(0, 'DiagnosticUnderlineHint', { underline = false, bold = true })
+-- Get all highlight groups
+local highlights = vim.fn.getcompletion("", "highlight")
+
+-- Disable underline for each group
+for _, group in ipairs(highlights) do
+  disable_underline(group)
+end
+
 
 -- Allow h and l to wrap across lines
 vim.opt.whichwrap:append '<,>,h,l'
@@ -90,7 +102,6 @@ vim.opt.whichwrap:append '<,>,h,l'
 --Map('sticky EOL', 'n', '$', 'g_')
 --vim.opt.virtualedit = 'onemore'
 vim.opt.laststatus = 3
-vim.cmd 'colorscheme kanagawa'
 vim.opt.statusline = '%t '
 -- set to sys python
 vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
@@ -98,6 +109,6 @@ vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
 vim.opt.updatetime = 1000
 vim.g.lazyvim_python_lsp = 'pylsp'
 
---vim.o.switchbuf='usetab' 
-vim.opt_local.spell =false
-vim.o.tabpagemax = 20 
+--vim.o.switchbuf='usetab'
+vim.opt_local.spell = false
+vim.o.tabpagemax = 20
