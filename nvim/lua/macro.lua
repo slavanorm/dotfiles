@@ -1,6 +1,7 @@
 function print_table(tbl)
     for key, value in pairs(tbl) do
-        vim.notify(key, value)
+        vim.notify(value)
+        vim.notify(key)
     end
 end
 
@@ -12,4 +13,3 @@ function Map(desc, mode, lhs, rhs, opts)
     -- todo: wk.add instead
     vim.keymap.set(mode, lhs, rhs, opts)
 end
-
