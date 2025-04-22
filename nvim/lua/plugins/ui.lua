@@ -108,6 +108,7 @@ return {
                     theme = {
                         all = {
                             ui = {
+                                bg='#000000',
                                 bg_gutter = 'none',
                             },
                         },

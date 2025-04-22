@@ -99,12 +99,12 @@ return {
                         sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
                         headers = {
                             breakpoints = "bp",
-                            scopes = "scope",
-                            exceptions = "exc",
-                            watches = "watch",
-                            threads = "thread",
-                            repl = "repl",
-                            console = "c",
+                            scopes = "sc",
+                            exceptions = "ex",
+                            watches = "wa",
+                            threads = "th",
+                            repl = "re",
+                            console = "co",
                         },
                     },
                 }
