@@ -1,5 +1,4 @@
 return {
-    'ThePrimeagen/vim-be-good',
     "benlubas/wrapping-paper.nvim",
     { 'williamboman/mason.nvim',   enabled = false },
     { 'nvim-lualine/lualine.nvim', enabled = false },

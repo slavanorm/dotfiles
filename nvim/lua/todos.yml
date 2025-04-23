@@ -1,47 +1,44 @@
-Reimport something on load
-ruff fails
-cwp
-toggle hover with T
-hl jumps but arrows dont jump around lines. 
-
 cool:
-  +-f^We(){} 
-  I-A 
-  * g* 
-  m{a-zA-Z} `{a-zA-Z} 
-  :tags 
-  I: shift <- -> 
-  :r - read file to buffer, 
-  :r! {cli} - read stdout of cli
-  :enew - new buf
-  :tabe - new tab
+  ops:
+    +-f^We(){} 
+    cwp
+  Insert mode: 
+    shift <- -> 
+  commands:
+    r - read file to buffer, 
+    ! execute
+    r! {cli} - read stdout of cli
+    enew - new buf
+    tabe - new tab
+    options
+    map 
+    set
+  
+
   BEW != bew. word respects case. W jumps ignore case
   y[ a i ][ wspb"[{(<' ] - yank [around, inner
-  :options
-  K - man word under cursor
+  gf - open file
+  gcc - comment
+
+
+args:
+  +- n lines
+
+read:
+  I-A 
+  * g* 
+  marks are global m{a-zA-Z} `{a-zA-Z} 
   yR - flash
   f,t,F,T
-  gf - open file on CWORD
-  gc / gcc!
+  tags 
 
+wish:
+  invert hotkey if word selected is true set false
+  r as replace many
+  ) - always close any previous: [{('"
+  spelling default off
+  zt wtf
+  $->g$
+  % selects other things like end of class/func/method/comment
 
-nvim args:
-  +- n lines
-  cd - - prev cd
-
-) - always close any previous: [{('"
-
-'foldmethod'    set foldmethod=manual  manual folding
-    set foldmethod=indent  folding by indent
-    set foldmethod=expr  folding by 'foldexpr'
-    set foldmethod=syntax  folding by syntax regions
-    set foldmethod=marker  folding by 'foldmarker'
-
-
-r as replace many
-invert hotkey if word selected is true set false
-
-spelling default off
-zt wtf
-$->g$
-% selects other things like end of class/func/method/comment
+ 

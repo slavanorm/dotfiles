@@ -10,7 +10,6 @@ local function dir_exists(path)
 end
 
 if not dir_exists(dev_dir) then
-    vim.notify 'work'
     vim.o.signcolumn = 'auto'
     return {
         'harrisoncramer/gitlab.nvim',
