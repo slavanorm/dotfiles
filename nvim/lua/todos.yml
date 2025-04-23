@@ -2,6 +2,7 @@ Reimport something on load
 ruff fails
 cwp
 toggle hover with T
+hl jumps but arrows dont jump around lines. 
 
 cool:
   +-f^We(){} 

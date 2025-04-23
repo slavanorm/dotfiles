@@ -76,14 +76,14 @@ vim.opt.smartindent = true
 -- Disable underlines for all highlight groups
 -- Helper function to update a highlight group
 local function disable_underline(group)
-  local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-  vim.api.nvim_set_hl(0, group, {
-    fg = hl.fg,
-    bg = hl.bg,
-    bold = hl.bold,
-    italic = false, 
-    underline = false,
-  })
+    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+    vim.api.nvim_set_hl(0, group, {
+        fg = hl.fg,
+        bg = hl.bg,
+        bold = hl.bold,
+        italic = false,
+        underline = false,
+    })
 end
 
 -- Get all highlight groups
@@ -91,12 +91,12 @@ local highlights = vim.fn.getcompletion("", "highlight")
 
 -- Disable underline for each group
 for _, group in ipairs(highlights) do
-  disable_underline(group)
+    disable_underline(group)
 end
 
 
 -- Allow h and l to wrap across lines
-vim.opt.whichwrap:append '<,>,h,l'
+vim.opt.whichwrap:append('<,>,h,l')
 
 -- Allow the cursor to move one character beyond the EOL
 --Map('sticky EOL', 'n', '$', 'g_')
@@ -112,3 +112,4 @@ vim.g.lazyvim_python_lsp = 'pylsp'
 --vim.o.switchbuf='usetab'
 vim.opt_local.spell = false
 vim.o.tabpagemax = 20
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#161616" })
