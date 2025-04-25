@@ -96,6 +96,7 @@ return {
         config = function()
             local t = require 'telescope'
             t.setup { defaults = telescope_defaults }
+            pcall(t.load_extension, 'git_worktree')
             pcall(t.load_extension, 'fzf')
             pcall(t.load_extension, 'ui-select')
         end,

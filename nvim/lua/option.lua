@@ -102,7 +102,7 @@ vim.opt.whichwrap:append('<,>,h,l')
 --Map('sticky EOL', 'n', '$', 'g_')
 --vim.opt.virtualedit = 'onemore'
 vim.opt.laststatus = 3
-vim.opt.statusline = '%t '
+vim.opt.statusline = '%{FugitiveHead()} %t'
 -- set to sys python
 vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
 -- Set a shorter updatetime for quicker hover response
