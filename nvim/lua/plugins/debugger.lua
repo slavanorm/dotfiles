@@ -1,7 +1,6 @@
 return {
     {
         'mfussenegger/nvim-dap',
-        enabled = true,
         ft = { 'python' },
         dependencies = {
             {
@@ -20,8 +19,9 @@ return {
                         },
                     },
                 }
-            }, 'nvim-neotest/nvim-nio',
-            'leoluz/nvim-dap-go',
+            },
+            'nvim-neotest/nvim-nio',
+            --'leoluz/nvim-dap-go',
             'theHamsta/nvim-dap-virtual-text',
             'mfussenegger/nvim-dap-python',
         },

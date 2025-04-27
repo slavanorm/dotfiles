@@ -112,11 +112,10 @@ return {
                     'LazyVim',
                 }
             },
-            'neovim/nvim-lspconfig',
-            'L3MON4D3/LuaSnip',
             'hrsh7th/nvim-cmp',
             'hrsh7th/cmp-nvim-lsp',
             'neovim/nvim-treesitter',
+            'L3MON4D3/LuaSnip',
         },
     },
 }

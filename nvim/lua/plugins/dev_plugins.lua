@@ -48,10 +48,6 @@ return {
                 enabled = false
             } },
         config = function()
-            vim.opt.statusline = ''
-            vim.opt.laststatus = 0
-
-
             require('leetcode').setup {
                 storage = {
                     home = os.getenv 'HOME' .. '/.leetcode',
@@ -67,6 +63,9 @@ return {
                 keys = { toggle = { 'x' } },
                 description = { position = 'bottom', show_stats = false },
             }
+            vim.opt.statusline = ''
+            vim.opt.laststatus = 0
+
         end,
     },
 }

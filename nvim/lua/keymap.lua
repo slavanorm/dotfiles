@@ -1,5 +1,8 @@
+-- ! for opinionated mapping.
+
 Map('auto[H]over t', 'n', '<leader>th', '<cmd>ToggleAutoHover<CR>')
 Map('[z]en [n]arrow', 'n', '<leader>tzn', '<cmd>ZenMode<CR>')
+Map('!esc using jk', 'i', 'jk', '<Esc>')
 
 Map('v always multiline', 'v', '<leader>V', 'V')
 
