@@ -8,12 +8,12 @@ return {
             },
             picker = {
                 sources = {
-                    files = { hidden = true, ignored = true },
+                    files = { hidden = true, ignored = false },
                     explorer = { tree = false },
 
                 },
                 hidden = true,
-                ignored = true,
+                ignored = false,
             },
             dashboard = {
                 preset = {
