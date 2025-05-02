@@ -2,8 +2,8 @@ local telescope_defaults = {
     --initial_mode = 'normal',
     --border = false,
     defaults = {
-        ripgrep_arguments = {
-            'rg', '--hidden', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'
+        path_display = {
+            'filename_first'
         }
     },
     layout_strategy = 'flex',
