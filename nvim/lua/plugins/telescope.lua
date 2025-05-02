@@ -1,6 +1,11 @@
 local telescope_defaults = {
     --initial_mode = 'normal',
     --border = false,
+    defaults = {
+        ripgrep_arguments = {
+            'rg', '--hidden', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'
+        }
+    },
     layout_strategy = 'flex',
     layout_config = {
         flex = {
@@ -36,7 +41,7 @@ local telescope_defaults = {
 local builtin = require 'telescope.builtin'
 Map('BS buffers', 'n', '<BS>', builtin.buffers)
 Map('[c]olorscheme', 'n', '<leader>tc', function()
-  builtin.colorscheme { enable_preview = true }
+    builtin.colorscheme { enable_preview = true }
 end)
 
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -50,36 +55,37 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 Map('[ ] Find existing buffers', 'n', '<leader><leader>', builtin.buffers)
 vim.keymap.set('n', '<leader>/', function()
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {})
+    builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {})
 end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>s/', function()
-  builtin.live_grep {
-    grep_open_files = true,
-    prompt_title = 'Live Grep in Open Files',
-  }
+    builtin.live_grep {
+        grep_open_files = true,
+        prompt_title = 'Live Grep in Open Files',
+    }
 end, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sN', function()
-  function Sort_by_mtime()
-    return require('telescope.sorters').new {
-      scoring_function = function(entry)
-        local path = entry.filename
-        if not path then
-          return 0
-        end
+    function Sort_by_mtime()
+        return require('telescope.sorters').new {
+            scoring_function = function(entry)
+                local path = entry.filename
+                if not path then
+                    return 0
+                end
 
-        local stat = vim.loop.fs_stat(path)
-        return stat and stat.mtime.sec or 0
-      end,
+                local stat = vim.loop.fs_stat(path)
+                return stat and stat.mtime.sec or 0
+            end,
+        }
+    end
+
+    builtin.live_grep {
+        cwd = vim.fn.stdpath 'config',
+        prompt_title = 'grep config',
+        sorter = Sort_by_mtime(),
     }
-  end
-  builtin.live_grep {
-    cwd = vim.fn.stdpath 'config',
-    prompt_title = 'grep config',
-    sorter = Sort_by_mtime(),
-  }
 end, { unpack(Keymap_opts), desc = '[S]earch [N]eovim files (grep)' })
 return {
-   {
+    {
         'nvim-telescope/telescope.nvim',
         dependencies = {
             'nvim-telescope/telescope-ui-select.nvim',

@@ -1,38 +1,56 @@
+export EDITOR=nvim
+export MANPAGER='nvim +Man!'
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# !exit for non-interactive shell
+[ -z "$PS1" ] && return
+
+#HOMEBREW_NO_AUTO_UPDATE=1
+#HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
+
+# !omzsh 
+export ZSH="$HOME/.oh-my-zsh"
+DISABLE_AUTO_TITLE="true"
+zstyle ':omz:update' mode disabled  # disable updates
+source $ZSH/oh-my-zsh.sh
+plugins=(git zsh-autosuggestions zsh-completions)
+bindkey '^[[C' expand-or-complete-prefix
+
+# !zsh conf
+export PS1=" %1~ >"
+# color
+export CLICOLOR=1
+export LSCOLORS="Gxfxcxdxbxegedabagacad"
+# completion
+#autoload -Uz compinit && compinit # done by omz
+zmodload zsh/complist
+
+# ! my conf, override omz
 eval "$(/opt/homebrew/bin/brew shellenv)"
 alias sys_python=/usr/bin/python3
 alias python3=python3.11
 alias python=python3
 alias pip='python3.11 -m pip'
-alias browse_epam="/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --profile-directory='Profile1'"
+alias n=nvim
 alias lc="n lc"
 alias l=lazygit
+alias history="history 1"
+alias ls="ls -AFGSh"
+alias mailsrv="ssh mailsrv.us-central1-a.t-wsite"
 
-#HOMEBREW_NO_AUTO_UPDATE=1
-#HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
-export EDITOR=nvim
-export MANPAGER='nvim +Man!'
-export XDG_CONFIG_HOME="$HOME/.config"
-
-alias n=nvim
-[ -z "$PS1" ] && return
-
-export PS1=" %1~ >"
-# load module for list-style selection
-autoload -Uz compinit
-compinit
-zmodload zsh/complist
-
-# use the module above for autocomplete selection
 #zstyle ':completion:*' menu yes select
-zstyle ':completion:*' file-list all
+setopt menucomplete 
+# colors 
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"zstyle ':completion:*' file-list all
+# (comments)
+zstyle ':completion:*' verbose yes
+# case insens 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+set completion-ignore-case on # maybe dontneed
+# sort by last access
 zstyle ':completion:*' file-sort access follow
-set completion-ignore-case on
-setopt menucomplete
-# now we can define keybindings for complist module
-# you want to trigger search on autocomplete items
-# so we'll bind some key to trigger history-incremental-search-forward function
-bindkey -M menuselect '?' history-incremental-search-forward
 
+# !conf history todo: not enough yet, seems useless
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 setopt HIST_NO_FUNCTIONS
@@ -42,8 +60,12 @@ export HISTORY_IGNORE='(ls|[bf]g|exit|pwd|nvim|history|cd ..|which| * --help)'
 export HISTSIZE=99999
 export HISTFILESIZE=999999
 export SAVEHIST=$HISTSIZE
-alias history="history 1"
-alias ls="ls -AFGSh"
+
+
+# show .files in autocomp
+setopt GLOB_DOTS
+
+
 
 function cd() {
    builtin cd $1
@@ -51,3 +73,5 @@ function cd() {
       . ./venv/bin/activate
    fi
 }
+
+
