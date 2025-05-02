@@ -9,11 +9,11 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 
 # !omzsh 
+plugins=(git zsh-autosuggestions zsh-completions)
 export ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_TITLE="true"
 zstyle ':omz:update' mode disabled  # disable updates
 source $ZSH/oh-my-zsh.sh
-plugins=(git zsh-autosuggestions zsh-completions)
 bindkey '^[[C' expand-or-complete-prefix
 
 # !zsh conf
