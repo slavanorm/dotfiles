@@ -7,6 +7,7 @@ return {
                 -- else it breaks persistence interaction on startup
             },
             picker = {
+                formatters = { file = { filename_first = true } },
                 sources = {
                     files = { hidden = true, ignored = false },
                     explorer = { tree = false },
