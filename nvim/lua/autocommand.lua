@@ -93,3 +93,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
     end
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.html",
+  callback = function()
+    vim.fn["jinja#AdjustFiletype"]()
+  end,
+})

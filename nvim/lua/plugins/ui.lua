@@ -72,4 +72,12 @@ return {
             }
         end,
     },
+    {
+        'folke/persistence.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+        },
+        event='VimEnter',
+
+    }
 }

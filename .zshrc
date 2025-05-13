@@ -1,12 +1,13 @@
 export EDITOR=nvim
 export MANPAGER='nvim +Man!'
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 # !exit for non-interactive shell
 [ -z "$PS1" ] && return
 
-#HOMEBREW_NO_AUTO_UPDATE=1
-#HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
+HOMEBREW_NO_AUTO_UPDATE=1
+HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 
 # !omzsh 
 plugins=(git zsh-autosuggestions zsh-completions)
