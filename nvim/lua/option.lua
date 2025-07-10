@@ -3,13 +3,9 @@ vim.opt.spell = false
 -- Disable confirmation prompts
 vim.opt.confirm = false
 
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
--- Make line numbers default
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.signcolumn = 'no'
+vim.opt.number = false
+vim.opt.relativenumber = false
+vim.opt.signcolumn = 'auto'
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 -- vim.opt.relativenumber = true
@@ -102,7 +98,7 @@ vim.opt.whichwrap:append('<,>,h,l')
 --Map('sticky EOL', 'n', '$', 'g_')
 --vim.opt.virtualedit = 'onemore'
 vim.opt.laststatus = 3
-vim.opt.statusline = '%{FugitiveHead()} %t'
+vim.opt.statusline = 'file:%t branch:%{FugitiveHead()} %= path:%f'
 -- set to sys python
 vim.g.python3_host_prog = 'python3.11' --'/opt/homebrew/bin/python3.11'
 -- Set a shorter updatetime for quicker hover response
@@ -113,3 +109,6 @@ vim.g.lazyvim_python_lsp = 'pylsp'
 vim.opt_local.spell = false
 vim.o.tabpagemax = 20
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "#161616" })
+
+-- improve folding
+vim.g.ifold_mode=2

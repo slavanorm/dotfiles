@@ -9,11 +9,10 @@ return {
             picker = {
                 formatters = { file = { filename_first = true } },
                 sources = {
-                    files = { hidden = true, ignored = false },
-                    explorer = { tree = false },
-
+                    files = { hidden = false, ignored = false },
+                    explorer = { tree = true },
                 },
-                hidden = true,
+                hidden = false,
                 ignored = false,
             },
             dashboard = {

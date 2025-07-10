@@ -29,14 +29,14 @@ zmodload zsh/complist
 # ! my conf, override omz
 eval "$(/opt/homebrew/bin/brew shellenv)"
 alias sys_python=/usr/bin/python3
-alias python3=python3.11
+alias python3=python3.12
 alias python=python3
-alias pip='python3.11 -m pip'
+alias pip='python3.12 -m pip'
 alias n=nvim
 alias lc="n lc"
 alias l=lazygit
 alias history="history 1"
-alias ls="ls -AFGSh"
+alias ls='ls -AFGSh'
 alias mailsrv="ssh mailsrv.us-central1-a.t-wsite"
 
 #zstyle ':completion:*' menu yes select
@@ -75,4 +75,7 @@ function cd() {
    fi
 }
 
+function cl() {
+    cd "$@" && ls -AFGSh
+}
 

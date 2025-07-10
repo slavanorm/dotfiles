@@ -90,6 +90,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
         -- load plugin only when invoked with path
         if #vim.v.argv > 2 and vim.fn.getftype(vim.v.argv[3]) == 'dir' then
                 require 'persistence'.load()
+                vim.cmd("filetype detect")
         end
     end
 })

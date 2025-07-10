@@ -5,6 +5,7 @@ notARepository: skip
 os:
   editPreset: "nvim"
 gui:
+  editor: nvim -d
   nerdFontsVersion: ""
   skipNoStagedFilesWarning: true
   sidePanelWidth: 0.4
@@ -15,10 +16,10 @@ gui:
   showListFooter: false
   screenMode: full
   border: hidden
-
   showBottomLine: false
 git:
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
   paging:
     colorArg: always
-    pager: delta --dark --paging=never
+    pager: nvim -R -c "set syntax=git" -c "set filetype=git" -
+    useConfig: false

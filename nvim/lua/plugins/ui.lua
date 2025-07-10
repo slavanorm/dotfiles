@@ -77,7 +77,6 @@ return {
         dependencies = {
             'neovim/nvim-lspconfig',
         },
-        event='VimEnter',
-
+        event = 'VimEnter',
     }
 }

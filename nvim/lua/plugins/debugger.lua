@@ -27,7 +27,7 @@ return {
         },
         config = function()
             local dap = require 'dap'
-            require('dap-python').setup '/opt/homebrew/bin/python3.11'
+            require('dap-python').setup '/opt/homebrew/bin/python3.12'
             local ui = require 'dap-view'
             Map('[B]p line dbg', 'n', '<leader>bB', dap.toggle_breakpoint)
             Map('de[b]ug to cursor', 'n', '<leader>gb', dap.run_to_cursor)

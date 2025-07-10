@@ -5,7 +5,10 @@ return {
             vim.cmd [[runtime macros/camelcasemotion.vim]]
         end,
     },
-    { 'tpope/vim-dadbod' },
+    {
+        'tpope/vim-dadbod',
+        dependencies = { "kristijanhusak/vim-dadbod-ui" }
+    },
     {
         "andythigpen/nvim-coverage",
         version = "*",

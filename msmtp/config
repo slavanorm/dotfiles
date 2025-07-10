@@ -1,0 +1,22 @@
+account s@tyryshkin.me
+host mail.tyryshkin.me
+port 465
+from s@tyryshkin.me
+user s@tyryshkin.me
+passwordeval "pass s@tyryshkin.me"
+auth on
+tls on
+tls_trust_file	/etc/ssl/cert.pem
+logfile /Users/v0/.local/state/msmtp/msmtp.log
+tls_starttls off
+account v@tyryshkin.me
+host mail.tyryshkin.me
+port 465
+from v@tyryshkin.me
+user v@tyryshkin.me
+passwordeval "pass v@tyryshkin.me"
+auth on
+tls on
+tls_trust_file	/etc/ssl/cert.pem
+logfile /Users/v0/.local/state/msmtp/msmtp.log
+tls_starttls off
